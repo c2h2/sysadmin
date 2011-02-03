@@ -1,0 +1,15 @@
+.svn
+_nopub
+www.51widget.com/app/config
+www.51widget.com/vendors/CLIENTS/config
+www.51widget.com/vendors/FLASHGRABBER/config
+www.51widget.com/vendors/POSTMAN/Model.class.php
+www.51widget.com/club/bbs/config.inc.php
+www.51widget.com/club/ucenter/data/config.inc.php
+www.51widget.com/club/bbs/attachments
+static.51widget.com/imgs/uploadImages
+clients.51widget.com/rubies/config
+support.51widget.com/include/ost-config.php
+support.51widget.com/attachments
+help.51widget.com/includes/config.php
+51widget.com
