@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'timeout'
+DELIM = "~"
+TCP_TIMEOUT = 2
+
+$stderr.puts "USAGE: pscan ip#{DELIM}num port0#{DELIM}port1"
+
+def report status, ip , port
+  puts "#{ip}:#{port} is open!" if status
+end
+
+def scan ip, port
+  begin
+    Timeout::timeout(TCP_TIMEOUT) do
+      t=TCPSocket.open(ip, port)
+      t.close
+      return true
+    end
+    return false
+  rescue
+  end
+  false
+  #Net::PingTCP(ip, port)
+end
+
+def scans ips, ports
+  ips.each do |ip|
+    ports.each do |port|
+      status = scan ip, port
+      report status, ip, port
+    end
+  end
+end
+
+ip   = ARGV[0]
+port = ARGV[1]
+
+ip_elems = ip.split(DELIM)
+port_elems = port.split(DELIM)
+
+if ip_elems.length == 1
+  ips = [ARVG[0]]
+else
+  ips=[]
+  ip_parts= ip_elems[0].split(".")
+  ip_elems[1].to_i.times do |inc|
+    ips << "#{ip_parts[0]}.#{ip_parts[1]}.#{ip_parts[2]}.#{ip_parts[3].to_i+inc}"
+  end
+end
+
+if port_elems.length == 1
+  ports = [ARGV[1]]
+else
+  ports = []
+  port_elems[1].times do |inc|
+    ports << port.to_i + inc
+  end
+end
+
+scans ips, ports
+
+
